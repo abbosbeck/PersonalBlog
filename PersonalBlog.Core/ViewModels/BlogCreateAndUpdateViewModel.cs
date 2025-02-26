@@ -2,13 +2,13 @@
 
 namespace PersonalBlog.Core.ViewModels
 {
-    public class BlogCreateViewModel
+    public class BlogCreateAndUpdateViewModel
     {
         public string Title { get; set; }
         public string Content { get; set; }
         public bool IsPublished { get; set; }
 
-        public static explicit operator BlogEntity(BlogCreateViewModel blogCreateViewModel)
+        public static explicit operator BlogEntity(BlogCreateAndUpdateViewModel blogCreateViewModel)
         {
             return new BlogEntity
             {
