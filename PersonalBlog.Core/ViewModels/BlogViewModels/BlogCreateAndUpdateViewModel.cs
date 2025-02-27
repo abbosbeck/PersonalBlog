@@ -1,6 +1,6 @@
 ﻿using PersonalBlog.Data.Entities;
 
-namespace PersonalBlog.Core.ViewModels
+namespace PersonalBlog.Core.ViewModels.BlogViewModels
 {
     public class BlogCreateAndUpdateViewModel
     {

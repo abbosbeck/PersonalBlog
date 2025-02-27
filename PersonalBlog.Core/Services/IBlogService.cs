@@ -1,4 +1,4 @@
-﻿using PersonalBlog.Core.ViewModels;
+﻿using PersonalBlog.Core.ViewModels.BlogViewModels;
 
 namespace PersonalBlog.Core.Services
 {
