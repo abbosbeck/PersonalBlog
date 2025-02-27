@@ -1,6 +1,6 @@
-using PersonalBlog.Data;
 using Microsoft.EntityFrameworkCore;
 using PersonalBlog.Core.Services;
+using PersonalBlog.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

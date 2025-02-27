@@ -47,10 +47,10 @@ namespace PersonalBlog.Core.Services
 
         public async Task<IEnumerable<BlogTitleViewModel>> GetBlogTitlesAsync()
         {
-            var blogTitleAndSlugs =  await _appDbContext.Blogs
-                .Select(b => new BlogTitleViewModel 
+            var blogTitleAndSlugs = await _appDbContext.Blogs
+                .Select(b => new BlogTitleViewModel
                 {
-                    Title = b.Title, 
+                    Title = b.Title,
                     Slug = b.Slug,
                 })
                 .ToListAsync();
@@ -68,7 +68,7 @@ namespace PersonalBlog.Core.Services
             blogEntity.Title = blogUpdateViewModel.Title;
             blogEntity.Content = blogUpdateViewModel.Content;
             blogEntity.Slug = SlugHelper.GenerateSlug(blogUpdateViewModel.Title);
-            
+
             int count = 1;
             string baseSlug = blogEntity.Slug;
             while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug))
