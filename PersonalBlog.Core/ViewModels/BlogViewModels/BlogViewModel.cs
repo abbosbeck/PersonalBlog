@@ -1,4 +1,6 @@
-﻿namespace PersonalBlog.Core.ViewModels.BlogViewModels
+﻿using PersonalBlog.Data.Entities;
+
+namespace PersonalBlog.Core.ViewModels.BlogViewModels
 {
     public class BlogViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalBlog.Core.Helpers;
-using PersonalBlog.Core.ViewModels;
+using PersonalBlog.Core.ViewModels.BlogViewModels;
 using PersonalBlog.Data;
 using PersonalBlog.Data.Entities;
 
