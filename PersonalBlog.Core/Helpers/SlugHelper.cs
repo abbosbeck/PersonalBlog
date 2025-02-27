@@ -10,8 +10,8 @@ namespace PersonalBlog.Core.Helpers
                 return string.Empty;
 
             string slug = title.ToLower();
-            slug = Regex.Replace(slug, @"[^a-z0-9\s-]", ""); 
-            slug = Regex.Replace(slug, @"\s+", "-"); 
+            slug = Regex.Replace(slug, @"[^a-z0-9\s-]", "");
+            slug = Regex.Replace(slug, @"\s+", "-");
             slug = slug.Trim('-');
 
             return slug;

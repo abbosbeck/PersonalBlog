@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalBlog.Core.Services;
-using PersonalBlog.Core.ViewModels;
+using PersonalBlog.Core.ViewModels.BlogViewModels;
 
 namespace PersonalBlog.Api.Controllers
 {
@@ -30,15 +30,15 @@ namespace PersonalBlog.Api.Controllers
         public async Task<IActionResult> AddBlogAsync([FromBody] BlogCreateAndUpdateViewModel blogCreateViewModel)
         {
             var slug = await _blogService.AddBlogAsync(blogCreateViewModel);
-            
+
             return Ok(slug);
         }
 
-        [HttpPut("Update Blog/{slug}")]
+        [HttpPut("{slug}")]
         public async Task<IActionResult> UpdateBlogAsync(string slug, [FromBody] BlogCreateAndUpdateViewModel blogUpdateViewModel)
         {
             await _blogService.UpdateBlogAsync(slug, blogUpdateViewModel);
-            
+
             return Ok();
         }
     }

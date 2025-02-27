@@ -18,4 +18,4 @@ namespace PersonalBlog.Core.ViewModels.BlogViewModels
             };
         }
     }
-}    
+}
