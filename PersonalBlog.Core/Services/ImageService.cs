@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using PersonalBlog.Data;
-using Microsoft.AspNetCore.Hosting;
-using PersonalBlog.Data.Entities;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
+using PersonalBlog.Data;
+using PersonalBlog.Data.Entities;
 
 namespace PersonalBlog.Core.Services
 {
@@ -43,7 +42,7 @@ namespace PersonalBlog.Core.Services
 
                 await _appDbContext.BlogImages.AddAsync(newImage);
                 await _appDbContext.SaveChangesAsync();
-             
+
                 return newImage.Url;
             }
             catch (Exception ex)
@@ -83,7 +82,7 @@ namespace PersonalBlog.Core.Services
                     blogImages.Add(newImage);
                     urls.Add(newImage.Url);
                 }
-               
+
                 await _appDbContext.BlogImages.AddRangeAsync(blogImages);
                 await _appDbContext.SaveChangesAsync();
 
