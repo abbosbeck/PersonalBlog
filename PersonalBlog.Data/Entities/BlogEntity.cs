@@ -10,5 +10,6 @@
         public bool IsPublished { get; set; }
         public DateOnly PublishedAt { get; set; }
         public List<BlogImageEntity> BlogImages { get; set; }
+        public List<BlogOldSlugEntity> OldSlugs { get; set; }
     }
 }

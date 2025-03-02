@@ -10,7 +10,7 @@ namespace PersonalBlog.Data
 
         public DbSet<BlogEntity> Blogs { get; set; }
         public DbSet<BlogImageEntity> BlogImages { get; set; }
-
+        public DbSet<BlogOldSlugEntity> OldSlugs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlogEntity>()
