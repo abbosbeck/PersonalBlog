@@ -5,7 +5,7 @@ namespace PersonalBlog.Core.Helpers
 {
     public class SaveImageHelper
     {
-        public static async Task<string> SaveAndCreateImagePathAsync(IFormFile image, 
+        public static async Task<string> SaveAndCreateImagePathAsync(IFormFile image,
                                                     IWebHostEnvironment webHostEnvironment)
         {
             var file = image;
