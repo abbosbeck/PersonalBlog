@@ -23,7 +23,8 @@ namespace PersonalBlog.Core.Services
 
             int count = 1;
             string baseSlug = blogEntity.Slug;
-            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug))
+            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug) ||
+                    await _appDbContext.OldSlugs.AnyAsync(x => x.OldSlug == blogEntity.Slug))
             {
                 blogEntity.Slug = $"{baseSlug}-{count}";
             }
@@ -40,6 +41,17 @@ namespace PersonalBlog.Core.Services
                 .FirstOrDefaultAsync(x => x.Slug == slug);
 
             if (blogEntity == null)
+            {
+                var blogIdWithOldSlug = await _appDbContext.OldSlugs
+                    .Where(x => x.OldSlug == slug)
+                    .Select(x => x.BlogId)
+                    .FirstOrDefaultAsync();
+
+                blogEntity = await _appDbContext.Blogs
+                    .FirstOrDefaultAsync(x => x.Id == blogIdWithOldSlug);
+            }
+            
+            if(blogEntity == null)
                 throw new Exception("There is no data with this slug");
 
             return (BlogViewModel)blogEntity;
@@ -69,9 +81,21 @@ namespace PersonalBlog.Core.Services
             blogEntity.Content = blogUpdateViewModel.Content;
             blogEntity.Slug = SlugHelper.GenerateSlug(blogUpdateViewModel.Title);
 
+            if (blogEntity.Slug != slug)
+            {
+                var oldSlug = await _appDbContext.OldSlugs
+                    .AddAsync(new BlogOldSlugEntity
+                    {
+                        BlogId = blogEntity.Id,
+                        OldSlug = slug,
+                        CreatedDate = DateTime.Now
+                    });
+            }
+
             int count = 1;
             string baseSlug = blogEntity.Slug;
-            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug))
+            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug) ||
+                    await _appDbContext.OldSlugs.AnyAsync(x => x.OldSlug == blogEntity.Slug))
             {
                 blogEntity.Slug = $"{baseSlug}-{count}";
             }
