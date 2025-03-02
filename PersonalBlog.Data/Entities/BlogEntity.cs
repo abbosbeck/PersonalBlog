@@ -9,5 +9,6 @@
         public Guid AuthorId { get; set; }
         public bool IsPublished { get; set; }
         public DateOnly PublishedAt { get; set; }
+        public List<BlogImageEntity> BlogImages { get; set; }
     }
 }
