@@ -23,7 +23,8 @@ namespace PersonalBlog.Core.Services
 
             int count = 1;
             string baseSlug = blogEntity.Slug;
-            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug))
+            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug) ||
+                    await _appDbContext.OldSlugs.AnyAsync(x => x.OldSlug == blogEntity.Slug))
             {
                 blogEntity.Slug = $"{baseSlug}-{count}";
             }
@@ -93,7 +94,8 @@ namespace PersonalBlog.Core.Services
 
             int count = 1;
             string baseSlug = blogEntity.Slug;
-            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug))
+            while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug) ||
+                    await _appDbContext.OldSlugs.AnyAsync(x => x.OldSlug == blogEntity.Slug))
             {
                 blogEntity.Slug = $"{baseSlug}-{count}";
             }
