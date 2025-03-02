@@ -69,6 +69,17 @@ namespace PersonalBlog.Core.Services
             blogEntity.Content = blogUpdateViewModel.Content;
             blogEntity.Slug = SlugHelper.GenerateSlug(blogUpdateViewModel.Title);
 
+            if (blogEntity.Slug != slug)
+            {
+                var oldSlug = await _appDbContext.OldSlugs
+                    .AddAsync(new BlogOldSlugEntity
+                    {
+                        BlogId = blogEntity.Id,
+                        OldSlug = slug,
+                        CreatedDate = DateTime.Now
+                    });
+            }
+
             int count = 1;
             string baseSlug = blogEntity.Slug;
             while (await _appDbContext.Blogs.AnyAsync(x => x.Slug == blogEntity.Slug))
