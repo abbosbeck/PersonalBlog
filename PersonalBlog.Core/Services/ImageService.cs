@@ -58,8 +58,8 @@ namespace PersonalBlog.Core.Services
                 List<string> urls = new List<string>();
                 foreach (var file in imageFiles)
                 {
-                   var filePath = await SaveImageHelper
-                        .SaveAndCreateImagePathAsync(file, _webHostEnvironment);
+                    var filePath = await SaveImageHelper
+                         .SaveAndCreateImagePathAsync(file, _webHostEnvironment);
 
                     var newImage = new BlogImageEntity
                     {
