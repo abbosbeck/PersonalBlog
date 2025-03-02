@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using PersonalBlog.Core.Helpers;
 using PersonalBlog.Data;
 using PersonalBlog.Data.Entities;
 
@@ -20,15 +21,8 @@ namespace PersonalBlog.Core.Services
         {
             try
             {
-                var file = imageFile;
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                string wwwrootPath = _webHostEnvironment.WebRootPath;
-                string filePath = Path.Combine(wwwrootPath, "uploads", fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
+                var filePath = await SaveImageHelper
+                        .SaveAndCreateImagePathAsync(imageFile, _webHostEnvironment);
 
                 var blogId = await _appDbContext.Blogs
                     .Where(x => x.Slug == blogSlug)
@@ -36,7 +30,7 @@ namespace PersonalBlog.Core.Services
 
                 var newImage = new BlogImageEntity
                 {
-                    Url = fileName,
+                    Url = filePath,
                     BlogId = blogId
                 };
 
@@ -64,18 +58,12 @@ namespace PersonalBlog.Core.Services
                 List<string> urls = new List<string>();
                 foreach (var file in imageFiles)
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string wwwrootPath = _webHostEnvironment.WebRootPath;
-                    string filePath = Path.Combine(wwwrootPath, "uploads", fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
+                   var filePath = await SaveImageHelper
+                        .SaveAndCreateImagePathAsync(file, _webHostEnvironment);
 
                     var newImage = new BlogImageEntity
                     {
-                        Url = fileName,
+                        Url = filePath,
                         BlogId = blogId
                     };
 
