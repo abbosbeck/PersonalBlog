@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalBlog.Data;
 
@@ -11,9 +12,11 @@ using PersonalBlog.Data;
 namespace PersonalBlog.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250302082950_addBlogImageEntity")]
+    partial class addBlogImageEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,29 +80,6 @@ namespace PersonalBlog.Data.Migrations
                     b.ToTable("BlogImages");
                 });
 
-            modelBuilder.Entity("PersonalBlog.Data.Entities.BlogOldSlugEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BlogId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OldSlug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("OldSlugs");
-                });
-
             modelBuilder.Entity("PersonalBlog.Data.Entities.BlogImageEntity", b =>
                 {
                     b.HasOne("PersonalBlog.Data.Entities.BlogEntity", "Blog")
@@ -111,22 +91,9 @@ namespace PersonalBlog.Data.Migrations
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("PersonalBlog.Data.Entities.BlogOldSlugEntity", b =>
-                {
-                    b.HasOne("PersonalBlog.Data.Entities.BlogEntity", "Blog")
-                        .WithMany("OldSlugs")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-                });
-
             modelBuilder.Entity("PersonalBlog.Data.Entities.BlogEntity", b =>
                 {
                     b.Navigation("BlogImages");
-
-                    b.Navigation("OldSlugs");
                 });
 #pragma warning restore 612, 618
         }
