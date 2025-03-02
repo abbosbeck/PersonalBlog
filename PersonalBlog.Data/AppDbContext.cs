@@ -14,9 +14,14 @@ namespace PersonalBlog.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<BlogEntity>()
                 .HasIndex(b => b.Slug)
                 .IsUnique();
+
+            modelBuilder.Entity<BlogEntity>()
+                .HasQueryFilter(b => b.IsPublished);
         }
     }
 }
