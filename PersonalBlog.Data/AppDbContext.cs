@@ -11,11 +11,17 @@ namespace PersonalBlog.Data
         public DbSet<BlogEntity> Blogs { get; set; }
         public DbSet<BlogImageEntity> BlogImages { get; set; }
         public DbSet<BlogOldSlugEntity> OldSlugs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<BlogEntity>()
                 .HasIndex(b => b.Slug)
                 .IsUnique();
+
+            modelBuilder.Entity<BlogEntity>()
+                .HasQueryFilter(b => b.IsPublished);
         }
     }
 }
