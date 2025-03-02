@@ -2,7 +2,7 @@
 
 namespace PersonalBlog.Core.Services
 {
-    interface IImageSerivce
+    public interface IImageSerivce
     {
         Task<string> SaveImageAsync(IFormFile imageFile, string blogSlug);
         Task<IEnumerable<string>> SaveImagesAsync(IEnumerable<IFormFile> imageFiles, string blogSlug);

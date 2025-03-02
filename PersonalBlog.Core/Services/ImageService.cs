@@ -3,7 +3,6 @@ using PersonalBlog.Data;
 using Microsoft.AspNetCore.Hosting;
 using PersonalBlog.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
 
 namespace PersonalBlog.Core.Services
 {
