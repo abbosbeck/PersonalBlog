@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalBlog.Data;
 
@@ -11,9 +12,11 @@ using PersonalBlog.Data;
 namespace PersonalBlog.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250304070808_AddUserEntity")]
+    partial class AddUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,15 +52,10 @@ namespace PersonalBlog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserEntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Slug")
                         .IsUnique();
-
-                    b.HasIndex("UserEntityId");
 
                     b.ToTable("Blogs");
                 });
@@ -123,28 +121,13 @@ namespace PersonalBlog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Telegram")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("PersonalBlog.Data.Entities.BlogEntity", b =>
-                {
-                    b.HasOne("PersonalBlog.Data.Entities.UserEntity", null)
-                        .WithMany("Blogs")
-                        .HasForeignKey("UserEntityId");
                 });
 
             modelBuilder.Entity("PersonalBlog.Data.Entities.BlogImageEntity", b =>
@@ -174,11 +157,6 @@ namespace PersonalBlog.Data.Migrations
                     b.Navigation("BlogImages");
 
                     b.Navigation("OldSlugs");
-                });
-
-            modelBuilder.Entity("PersonalBlog.Data.Entities.UserEntity", b =>
-                {
-                    b.Navigation("Blogs");
                 });
 #pragma warning restore 612, 618
         }

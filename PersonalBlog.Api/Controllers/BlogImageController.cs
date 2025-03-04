@@ -17,7 +17,7 @@ namespace PersonalBlog.Api.Controllers
         public async Task<IActionResult> AddImageAsync(IFormFile imageFile, [FromForm] string blogSlug)
         {
             var url = await _imageService.SaveImageAsync(imageFile, blogSlug);
-         
+
             return Ok(url);
         }
         [HttpPost("Add Images")]
