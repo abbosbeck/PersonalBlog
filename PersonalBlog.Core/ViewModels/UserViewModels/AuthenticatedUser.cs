@@ -1,6 +1,6 @@
 ﻿namespace PersonalBlog.Core.ViewModels.UserViewModels
 {
-    class AuthenticatedUser
+    public class AuthenticatedUser
     {
         public string Name { get; set; }
         public string UserName { get; set; }
