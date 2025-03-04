@@ -20,9 +20,12 @@ namespace PersonalBlog.Data
             modelBuilder.Entity<BlogEntity>()
                 .HasIndex(b => b.Slug)
                 .IsUnique();
-
             modelBuilder.Entity<BlogEntity>()
                 .HasQueryFilter(b => b.IsPublished);
+
+            modelBuilder.Entity<UserEntity>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
         }
     }
 }
