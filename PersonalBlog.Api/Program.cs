@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PersonalBlog.Core.Services;
+using PersonalBlog.Core.Services.UserServices;
 using PersonalBlog.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContextPool<AppDbContext>(options
 
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IImageSerivce, ImageService>();
+builder.Services.AddScoped<IUserService, UserSerivce>();    
 
 var app = builder.Build();
 
