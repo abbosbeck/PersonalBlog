@@ -17,7 +17,7 @@ builder.Services.AddDbContextPool<AppDbContext>(options
 
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IImageSerivce, ImageService>();
-builder.Services.AddScoped<IUserService, UserSerivce>();    
+builder.Services.AddScoped<IUserService, UserSerivce>();
 
 var app = builder.Build();
 
