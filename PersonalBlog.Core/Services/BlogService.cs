@@ -50,8 +50,8 @@ namespace PersonalBlog.Core.Services
                 blogEntity = await _appDbContext.Blogs
                     .FirstOrDefaultAsync(x => x.Id == blogIdWithOldSlug);
             }
-            
-            if(blogEntity == null)
+
+            if (blogEntity == null)
                 throw new Exception("There is no data with this slug");
 
             return (BlogViewModel)blogEntity;
