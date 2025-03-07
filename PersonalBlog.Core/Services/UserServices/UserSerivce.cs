@@ -17,14 +17,14 @@ namespace PersonalBlog.Core.Services.UserServices
             userLoginViewModel.Password = StringHasher.HashPassword(userLoginViewModel.Password);
 
             var user = await _appDbContext.Users
-                            .FirstOrDefaultAsync(u => u.Username == userLoginViewModel.Username & 
+                            .FirstOrDefaultAsync(u => u.Username == userLoginViewModel.Username &
                                                             u.Password == userLoginViewModel.Password);
-            
-            if (user == null) 
+
+            if (user == null)
             {
                 throw new Exception("There is no user with this credentials");
             }
-            
+
             return Token
         }
 
