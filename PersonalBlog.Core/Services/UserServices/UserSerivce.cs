@@ -1,4 +1,6 @@
-﻿using PersonalBlog.Core.ViewModels.UserViewModels;
+﻿using Microsoft.EntityFrameworkCore;
+using PersonalBlog.Core.Helpers;
+using PersonalBlog.Core.ViewModels.UserViewModels;
 using PersonalBlog.Data;
 
 namespace PersonalBlog.Core.Services.UserServices
@@ -10,9 +12,20 @@ namespace PersonalBlog.Core.Services.UserServices
         {
             _appDbContext = appDbContext;
         }
-        public Task<AuthenticatedUser> AuthenticateAsync(UserLoginViewModel userLoginViewModel)
+        public async Task<AuthenticatedUser> AuthenticateAsync(UserLoginViewModel userLoginViewModel)
         {
-            throw new NotImplementedException();
+            userLoginViewModel.Password = StringHasher.HashPassword(userLoginViewModel.Password);
+
+            var user = await _appDbContext.Users
+                            .FirstOrDefaultAsync(u => u.Username == userLoginViewModel.Username & 
+                                                            u.Password == userLoginViewModel.Password);
+            
+            if (user == null) 
+            {
+                throw new Exception("There is no user with this credentials");
+            }
+            
+            return Token
         }
 
         public Task<AuthenticatedUser> RegisterAsync(UserRegisterViewModel userRegisterViewModel)
