@@ -81,5 +81,13 @@ namespace PersonalBlog.Core.Services
                 throw new Exception("Something went wrong: {0}", ex);
             }
         }
+
+        public async Task<IEnumerable<string>> GetAllImagesAsync()
+        {
+            var images = await _appDbContext.BlogImages.ToListAsync();
+
+            // there will be some logic
+            return images;
+        }
     }
 }
