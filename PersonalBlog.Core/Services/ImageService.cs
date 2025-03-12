@@ -82,12 +82,12 @@ namespace PersonalBlog.Core.Services
             }
         }
 
-        public async Task<IEnumerable<string>> GetAllImagesAsync()
+       /* public async Task<IEnumerable<string>> GetAllImagesAsync()
         {
             var images = await _appDbContext.BlogImages.ToListAsync();
 
             // there will be some logic
             return images;
-        }
+        }*/
     }
 }
