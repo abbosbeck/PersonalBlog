@@ -41,6 +41,6 @@ namespace PersonalBlog.Core.Helpers
 
     public class TokenService
     {
-        
+
     }
 }
