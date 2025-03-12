@@ -6,6 +6,6 @@ namespace PersonalBlog.Core.Services
     {
         Task<string> SaveImageAsync(IFormFile imageFile, string blogSlug);
         Task<IEnumerable<string>> SaveImagesAsync(IEnumerable<IFormFile> imageFiles, string blogSlug);
-        Task<IEnumerable<string>> GetAllImagesAsync();
+        /*Task<IEnumerable<string>> GetAllImagesAsync();*/
     }
 }
